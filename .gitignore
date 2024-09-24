@@ -1,2 +1,6 @@
 data/*
 data/
+!data/*.joblib
+!data/*indices.npy
+!data/gene_ids.npy
+!data/cell_classes.npy
