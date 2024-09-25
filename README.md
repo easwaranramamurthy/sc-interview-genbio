@@ -19,10 +19,10 @@ Further, visualizing the first two dimensions after UMAP reduction gives an indi
 
 ![UMAP](plots/train_umap.png)
 
-After confirming the number of PCs needed and that there is some structure to be exploited in the training data that could be used to learn cell type labels, I then moved on to training a model.
+After confirming the number of PCs needed and that there is some structure to be exploited in the training data that could be used to learn cell type labels, I then moved on to training a model. 
 
 ## Step 2: training a logistic regression classifier using l1 lasso penalty
-Cell types in the human body can be uniquely defined by the differential expression of certain marker genes in the genome. Just having high or low expression of a marker gene can delineate cell types. Therefore, I assumed there would be a good chance that training a linear model which models cell type as a linear function of the gene expression counts could be a reasonable step to start with. Second, only a few genes are likely to be markers and a harsh l1 penalty could be useful to just select the important genes and ignore the rest.
+Cell types in the human body can be uniquely defined by the differential expression of certain marker genes in the genome. Just having high or low expression of a marker gene can delineate cell types. Therefore, I assumed there would be a good chance that training a linear model which models cell type as a linear function of the gene expression counts could be a reasonable step to start with. Second, only a few genes are likely to be markers and a harsh l1 penalty could be useful to just select the important genes and ignore the rest. Third, looking at the frequency of labels in the training set, it seems like there is a huge imbalance in the number of examples for each class in the training set. Therefore, I decided to have a balanced loss which accounted for the frequency of the cell classes in the training set.
 
 The training script can be found here:
 ```
@@ -43,6 +43,8 @@ Briefly, in this notebook, I load the model .joblib file and make predictions on
 Further, if we plot the accuracy by normalizing the confusion matrix for each row, we can see that it can easily classify cell types like B-cells, CD14+ monocytes, dendritic cells, and CD34+ cells but it runs into issues when classifying a few but not all closely related T cell types. Particularly, the model misclassifies CD4+ T helper cells as CD8+ cytotoxic T cells.
 
 ![confusion_ratio](plots/confusion_ratio.png)
+
+As can be seen from the plot above of the first two dimensions after UMAP transformation, the cells for these cell types are interspersed among each other and hence, these are particularly hard cell types to classify.
 
 ## Things I would try if I had more time:
 
