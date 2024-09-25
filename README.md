@@ -40,7 +40,7 @@ Briefly, in this notebook, I load the model .joblib file and make predictions on
 
 ![confusion_matrix](plots/confusion_mat.png)
 
-Further, if we plot the accuracy by normalizing the confusion matrix for each row, we can see that it can easily classify cell types like B-cells, CD14+ monocytes, dendritic cells, and CD34+ cells but it runs into issues when classifying a few but not all closely related T cell types. 
+Further, if we plot the accuracy by normalizing the confusion matrix for each row, we can see that it can easily classify cell types like B-cells, CD14+ monocytes, dendritic cells, and CD34+ cells but it runs into issues when classifying a few but not all closely related T cell types. Particularly, the model misclassifies CD4+ T helper cells as CD8+ cytotoxic T cells.
 
 ![confusion_ratio](plots/confusion_ratio.png)
 
@@ -51,4 +51,4 @@ Further, if we plot the accuracy by normalizing the confusion matrix for each ro
 
 ![training_set_confusion_mat](plots/confusion_ratio_train.png)
 
-3. As we can see from the confusion matrix for the training set, it seems like we are overfitting and able to classify every cell type accurately aside from CD8+/CD45RA+ Naive cytotoxic cells. More regularization of the model will likely help prevent overfitting and lead to even better performance on the validation set. We could do this with a higher weight on the l1 penalty to select even fewer informative featues. Training on the PCs will also likely reduce overfitting since it will capture most of the important variation in the data.
+3. As we can see from the confusion matrix for the training set, it seems like we are overfitting and able to classify every cell type accurately aside from CD8+ cytotoxic T cells. More regularization of the model will likely help prevent overfitting and lead to even better performance on the validation set. We could do this with a higher weight on the l1 penalty to select even fewer informative featues. Training on the PCs will also likely reduce overfitting since it will capture most of the important variation in the data.
